@@ -1,0 +1,19 @@
+name: "${project.name}"
+version: "${project.version}"
+api: ["1.0.13"]
+main: com.mefrreex.chestcreator.ChestCreator
+
+softdepend:
+  - "PlaceholderAPI"
+  - "FormCreator"
+
+depend:
+  - "FakeInventories"
+
+permissions:
+  chestcreator:
+    default: true
+  chestcreator.open:
+    default: op
+  chestcreator.info:
+    default: true

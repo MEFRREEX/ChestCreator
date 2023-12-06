@@ -1,0 +1,4 @@
+# Registration of the chest
+chests:
+  # chest name: "chest path in the 'chests' folder"
+  example: "example.json"

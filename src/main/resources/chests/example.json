@@ -1,0 +1,73 @@
+{
+    // Command
+    "command": {
+        // Is enable
+        "enable": true,
+        "name": "example",
+        "description": "Example command", 
+        // Command aliases
+        "aliases": ["example1"],
+        // Permission
+        // Delete it if you don't have to
+        "permission": "chestcreator.example"
+    },
+    // Chest title
+    "title": "Example chest",
+    // Inventory type
+    // Available: CHEST, DOUBLE_CHEST, HOPPER, DROPPER
+    "type": "CHEST",
+    // Chest items
+    "items": {
+        "12": { // <-- Item slot
+            // Item id (id:damage)
+            "id": "267:0",
+            "name": "First item",
+            // Item lore
+            "lore": [
+                "&dHello, %player%",
+                "&6Click me!"
+            ],
+            // Item actions
+            "actions": [
+                {
+                    // Available types: 
+                    // PLAYER_COMMAND - Execute command from player
+                    // CONSOLE_COMMAND  - Execute command from server
+                    // MESSAGE - Send message to player
+                    // PLAYER_MESSAGE - Send message from player
+                    // OPEN - Open other chest
+                    // OPEN_FORM - Open form from FormCreator
+                    "type": "OPEN",    // Type
+                    "value": "example" // Action value
+                }
+            ]   
+        },
+        "14": {
+            "id": "416:0",
+            "name": "Close",
+            "canTake": false, // Can a player take an item
+            "close": true, // Close the chest after a click
+            "lore": ["&сClick to close"],
+            "actions": [
+                {
+                    "type": "PLAYER_COMMAND",
+                    "value": "say Test"
+                }
+            ]
+        }
+    },
+    // Chest open actions
+    "openActions": [
+        {
+            "type": "CONSOLE_COMMAND",
+            "value": "say %player% Chest opened!"
+        }
+    ],
+    // Chest close actions
+    "closeActions": [
+        {
+            "type": "CONSOLE_COMMAND",
+            "value": "say %player% Chest closed!"
+        }
+    ]
+}
