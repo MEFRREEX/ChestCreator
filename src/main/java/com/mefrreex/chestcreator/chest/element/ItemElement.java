@@ -1,18 +1,17 @@
 package com.mefrreex.chestcreator.chest.element;
 
-import com.google.gson.annotations.SerializedName;
-import com.mefrreex.chestcreator.chest.action.Action;
-import com.mefrreex.chestcreator.utils.Format;
-
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import cn.nukkit.utils.TextFormat;
+import com.mefrreex.chestcreator.chest.action.Action;
+import com.mefrreex.chestcreator.utils.Format;
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter @Setter
 @ToString
@@ -28,6 +27,8 @@ public class ItemElement {
 
     @SerializedName("actions") 
     private List<Action> actions = new ArrayList<>();
+
+    private static final String RESET = TextFormat.RESET.toString() + TextFormat.WHITE.toString(); 
 
     public ItemElement(int id, int damage, String name) {
         this.id = id + ":" + damage;
@@ -57,16 +58,18 @@ public class ItemElement {
      */
     public Item getItem(Player player) {
         String[] data = id.split(":");
-        Item item = Item.get(
-            Integer.parseInt(data[0]), 
-            Integer.parseInt(data[1]));
-        item.setCustomName(Format.format(name, player));
+        int itemId = Integer.parseInt(data[0]);
+        int itemDamage = Integer.parseInt(data[1]);
+    
+        Item item = Item.get(itemId, itemDamage);
+        item.setCustomName(RESET + Format.format(name, player));
+    
         if (lore != null) {
             item.setLore(lore.stream()
-                .map(line -> Format.format(line, player))
-                .collect(Collectors.toList())
-                .toArray(new String[0]));
+                .map(line -> RESET + Format.format(line, player))
+                .toArray(String[]::new));
         }
+    
         return item;
     }
 }
