@@ -54,7 +54,7 @@ public class ChestCreator extends PluginBase {
     }
 
     public void metrics() {
-        int pluginId = 19705;
+        int pluginId = 20458;
         Metrics metrics = new Metrics(this, pluginId);
         metrics.addCustomChart(new Metrics.SimplePie("server_movement", () -> String.valueOf(this.getConfig().getBoolean("PowerNukkiX-movement-server"))));
         metrics.addCustomChart(new Metrics.SimplePie("nukkit_version", () -> this.getServer().getNukkitVersion()));
