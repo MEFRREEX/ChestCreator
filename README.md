@@ -61,7 +61,7 @@ Example chest:
             "name": "Close",
             "canTake": false, // Can a player take an item
             "close": true, // Close the chest after a click
-            "lore": ["&сClick to close"],
+            "lore": ["&cClick to close"],
             "actions": [
                 {
                     "type": "PLAYER_COMMAND",

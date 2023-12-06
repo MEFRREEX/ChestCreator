@@ -28,7 +28,7 @@
             "name": "Close",
             "canTake": false,
             "close": true,
-            "lore": ["&сClick to close"],
+            "lore": ["&cClick to close"],
             "actions": [
                 {
                     "type": "PLAYER_COMMAND",
