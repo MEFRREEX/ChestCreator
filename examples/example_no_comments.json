@@ -1,0 +1,52 @@
+{
+    "command": {
+        "enable": true,
+        "name": "example",
+        "description": "Example command",
+        "aliases": ["example1"],
+        "permission": "chestcreator.example"
+    },
+    "title": "Example chest",
+    "type": "CHEST",
+    "items": {
+        "12": {
+            "id": "267:0",
+            "name": "First item",
+            "lore": [
+                "&dHello, %player%",
+                "&6Click me!"
+            ],
+            "actions": [
+                {
+                    "type": "OPEN",
+                    "value": "example"
+                }
+            ]   
+        },
+        "14": {
+            "id": "416:0",
+            "name": "Close",
+            "canTake": false,
+            "close": true,
+            "lore": ["&сClick to close"],
+            "actions": [
+                {
+                    "type": "PLAYER_COMMAND",
+                    "value": "say Test"
+                }
+            ]
+        }
+    },
+    "openActions": [
+        {
+            "type": "CONSOLE_COMMAND",
+            "value": "say %player% Chest opened!"
+        }
+    ],
+    "closeActions": [
+        {
+            "type": "CONSOLE_COMMAND",
+            "value": "say %player% Chest closed!"
+        }
+    ]
+}
