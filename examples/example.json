@@ -16,6 +16,10 @@
     // Inventory type
     // Available: CHEST, DOUBLE_CHEST, HOPPER, DROPPER
     "type": "CHEST",
+    // Mode of switching between chests
+    // Available: DEFAULT (default), REOPEN (before the new chest is opened, 
+    // the current chest will be closed)
+    "switchMode": "DEFAULT",
     // Chest items
     "items": {
         "12": { // <-- Item slot

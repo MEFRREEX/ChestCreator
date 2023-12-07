@@ -8,6 +8,7 @@
     },
     "title": "Example chest",
     "type": "CHEST",
+    "switchMode": "DEFAULT",
     "items": {
         "12": {
             "id": "minecraft:iron_sword",
