@@ -4,6 +4,7 @@ import cn.nukkit.plugin.PluginBase;
 import com.mefrreex.chestcreator.chest.ChestManager;
 import com.mefrreex.chestcreator.chest.action.executor.ExecutorManager;
 import com.mefrreex.chestcreator.command.ChestCreatorCommand;
+import com.mefrreex.chestcreator.listener.ChestListener;
 import com.mefrreex.chestcreator.metrics.Metrics;
 import com.mefrreex.chestcreator.utils.Language;
 import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
@@ -33,6 +34,7 @@ public class ChestCreator extends PluginBase {
         ChestManager.loadAll();
         ChestCreatorCommand.register();
         this.loadPlaceholders();
+        this.registerListeners();
     }
 
     private void setup() {
@@ -51,6 +53,10 @@ public class ChestCreator extends PluginBase {
         if (this.getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             placeholderApi = PlaceholderAPI.getInstance();
         }
+    }
+
+    private void registerListeners() {
+        this.getServer().getPluginManager().registerEvents(new ChestListener(), this);
     }
 
     public void metrics() {

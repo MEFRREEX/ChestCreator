@@ -5,6 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandMap;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
+import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
 import com.mefrreex.chestcreator.chest.action.Action;
 import com.mefrreex.chestcreator.chest.command.ChestCommand;
 import com.mefrreex.chestcreator.chest.command.ChestCommandExecutor;
@@ -90,7 +91,7 @@ public class Chest {
     }
 
     /**
-     * Create a chest in ChestConstructor
+     * Create a chest in FakeInventories
      * @param player Player
      * @return Inventory
      */
@@ -129,6 +130,8 @@ public class Chest {
             action.execute(player);
         });
 
-        player.addWindow(build(player));
+        Inventory inventory = this.build(player);
+        ChestManager.getPlayerChest().put(player, new PlayerChest(this, inventory));
+        player.addWindow(inventory);
     }
 }
