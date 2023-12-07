@@ -5,6 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandMap;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
+import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
 import com.mefrreex.chestcreator.chest.action.Action;
 import com.mefrreex.chestcreator.chest.command.ChestCommand;
 import com.mefrreex.chestcreator.chest.command.ChestCommandExecutor;
@@ -31,6 +32,7 @@ public class Chest {
     private transient ChestCommandExecutor executableCommand;
 
     @SerializedName("type") private InventoryType type;
+    @SerializedName("switchMode") private ChestSwitchMode switchMode;
     @SerializedName("title") private String title;
     @SerializedName("items") private Map<Integer, ItemElement> items = new HashMap<>();
 
@@ -89,8 +91,12 @@ public class Chest {
         return this;
     }
 
+    public ChestSwitchMode getSwitchMode() {
+        return switchMode != null ? switchMode : ChestSwitchMode.DEFAULT;
+    }
+
     /**
-     * Create a chest in ChestConstructor
+     * Create a chest in FakeInventories
      * @param player Player
      * @return Inventory
      */
@@ -129,6 +135,8 @@ public class Chest {
             action.execute(player);
         });
 
-        player.addWindow(build(player));
+        Inventory inventory = this.build(player);
+        ChestManager.getPlayerChest().put(player, new PlayerChest(this, inventory));
+        player.addWindow(inventory);
     }
 }

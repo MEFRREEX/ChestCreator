@@ -1,12 +1,15 @@
 package com.mefrreex.chestcreator.chest;
 
+import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.inventory.Inventory;
 import cn.nukkit.utils.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.mefrreex.chestcreator.ChestCreator;
 import com.mefrreex.chestcreator.event.ChestLoadEvent;
+import lombok.Getter;
 
 import java.io.File;
 import java.io.FileReader;
@@ -18,6 +21,9 @@ import java.util.Map;
 public class ChestManager {
     
     private static final Map<String, Chest> chests = new HashMap<>();
+
+    @Getter
+    private static final Map<Player, PlayerChest> playerChest = new HashMap<>();
 
     private static final Gson gson = new Gson();
 
@@ -79,5 +85,9 @@ public class ChestManager {
             File file = new File(getChestsFolder() + "/" + path);
             load(name, file);
         }
+    }
+
+    public record PlayerChest(Chest chest, Inventory inventory) {
+    
     }
 }

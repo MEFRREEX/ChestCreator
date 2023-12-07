@@ -1,7 +1,9 @@
 package com.mefrreex.chestcreator.chest.action.executor;
 
 import cn.nukkit.Player;
+import com.mefrreex.chestcreator.chest.Chest;
 import com.mefrreex.chestcreator.chest.ChestManager;
+import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
 
 public class OpenExecutor implements Executor {
 
@@ -10,7 +12,15 @@ public class OpenExecutor implements Executor {
         if (!ChestManager.exists(name)) {
             throw new RuntimeException("Chest with name " + name + " not found");
         }
-        ChestManager.get(name).send(player);
-    }
 
+        Chest chest = ChestManager.get(name);
+
+        PlayerChest playerChest = ChestManager.getPlayerChest().get(player);
+        if (playerChest != null) {
+            Chest currentChest = playerChest.chest();
+            currentChest.getSwitchMode().process(player, playerChest, chest);
+        } else {
+            chest.send(player);
+        }
+    }
 }
