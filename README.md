@@ -1,7 +1,7 @@
 # ChestCreator
 Tool for easy creation of chests in Json file for Nukkit
 
-> [!WARNING]
+> [!IMPORTANT]
 > This plugin is dependent on the [FakeInventories](https://github.com/IWareQ/FakeInventories) library
 
 ## How to use
@@ -154,3 +154,9 @@ ExecutorManager.getExecutor("YOUR_EXECUTOR");
 |----------------|-------------|----------------------------------|
 | ChestLoadEvent | true        | Called when the chest is loaded  |
 | ChestSendEvent | true        | Called when a chest is opened    |
+
+> [!TIP]
+> Chest slots identifiers
+> 
+> ![image](https://github.com/MEFRREEX/ChestCreator/assets/83061703/95e27994-0668-4654-b41c-d846148550f4)
+
