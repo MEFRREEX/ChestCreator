@@ -155,6 +155,8 @@ ExecutorManager.getExecutor("YOUR_EXECUTOR");
 | ChestLoadEvent | true        | Called when the chest is loaded  |
 | ChestSendEvent | true        | Called when a chest is opened    |
 
+# 
+
 > [!TIP]
 > Chest slots identifiers
 > 
