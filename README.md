@@ -33,8 +33,8 @@ Example chest:
     // Chest items
     "items": {
         "12": { // <-- Item slot
-            // Item id (id:damage)
-            "id": "267:0",
+            // Item id (Minecraft item id)
+            "id": "minecraft:iron_sword",
             "name": "First item",
             // Item lore
             "lore": [
@@ -57,7 +57,7 @@ Example chest:
             ]   
         },
         "14": {
-            "id": "416:0",
+            "id": "minecraft:barrier",
             "name": "Close",
             "canTake": false, // Can a player take an item
             "close": true, // Close the chest after a click

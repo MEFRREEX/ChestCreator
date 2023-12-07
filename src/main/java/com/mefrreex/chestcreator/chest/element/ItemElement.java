@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 public class ItemElement {
     
-    @SerializedName("id") private String id;
+    @SerializedName("id") private String namespaceId;
     @SerializedName("name") private String name;
     @SerializedName("canTake") private boolean canTake;
     @SerializedName("close") private boolean close;
@@ -30,8 +30,8 @@ public class ItemElement {
 
     private static final String RESET = TextFormat.RESET.toString() + TextFormat.WHITE.toString(); 
 
-    public ItemElement(int id, int damage, String name) {
-        this.id = id + ":" + damage;
+    public ItemElement(String namespaceId, String name) {
+        this.namespaceId = namespaceId;
         this.name = name;
     }
 
@@ -57,11 +57,7 @@ public class ItemElement {
      * @return Item
      */
     public Item getItem(Player player) {
-        String[] data = id.split(":");
-        int itemId = Integer.parseInt(data[0]);
-        int itemDamage = Integer.parseInt(data[1]);
-    
-        Item item = Item.get(itemId, itemDamage);
+        Item item = Item.fromString(namespaceId);
         item.setCustomName(RESET + Format.format(name, player));
     
         if (lore != null) {

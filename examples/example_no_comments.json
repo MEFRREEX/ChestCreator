@@ -10,7 +10,7 @@
     "type": "CHEST",
     "items": {
         "12": {
-            "id": "267:0",
+            "id": "minecraft:iron_sword",
             "name": "First item",
             "lore": [
                 "&dHello, %player%",
@@ -24,7 +24,7 @@
             ]   
         },
         "14": {
-            "id": "416:0",
+            "id": "minecraft:barrier",
             "name": "Close",
             "canTake": false,
             "close": true,
