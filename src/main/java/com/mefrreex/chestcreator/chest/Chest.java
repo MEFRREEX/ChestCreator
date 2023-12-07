@@ -32,6 +32,7 @@ public class Chest {
     private transient ChestCommandExecutor executableCommand;
 
     @SerializedName("type") private InventoryType type;
+    @SerializedName("switchMode") private ChestSwitchMode switchMode;
     @SerializedName("title") private String title;
     @SerializedName("items") private Map<Integer, ItemElement> items = new HashMap<>();
 
@@ -88,6 +89,10 @@ public class Chest {
     public Chest addCloseAction(Action action) {
         closeActions.add(action);
         return this;
+    }
+
+    public ChestSwitchMode getSwitchMode() {
+        return switchMode != null ? switchMode : ChestSwitchMode.DEFAULT;
     }
 
     /**

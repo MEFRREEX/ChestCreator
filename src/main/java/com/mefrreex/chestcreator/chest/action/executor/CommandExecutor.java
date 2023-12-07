@@ -2,22 +2,33 @@ package com.mefrreex.chestcreator.chest.action.executor;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.command.CommandMap;
 
 public class CommandExecutor implements Executor {
 
     private final boolean isPlayer;
+    private final Server server;
 
     public CommandExecutor(boolean isPlayer) {
         this.isPlayer = isPlayer;
+        this.server = Server.getInstance();
     }
 
     @Override
-    @SuppressWarnings("all")
     public void execute(Player player, String command) {
-        if (isPlayer) {
-            Server.getInstance().dispatchCommand(player, command);
+        if (server.isPrimaryThread()) {
+            executeCommand(player, command);
         } else {
-            Server.getInstance().dispatchCommand(Server.getInstance().getConsoleSender(), command);
+            server.getScheduler().scheduleTask(null, () -> executeCommand(player, command));
         }
-    }   
+    }
+
+    private void executeCommand(Player player, String command) {
+        CommandMap commandMap = server.getCommandMap();
+        if (isPlayer) {
+            commandMap.executeCommand(player, command);
+        } else {
+            commandMap.executeCommand(server.getConsoleSender(), command);
+        }
+    }
 }
