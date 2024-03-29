@@ -18,7 +18,10 @@ import java.util.List;
 public class ItemElement {
     
     private String id;
+    private int meta;
+    private int count;
     private String name;
+
     private boolean canTake;
     private boolean close;
 
@@ -56,6 +59,8 @@ public class ItemElement {
      */
     public Item getItem(Player player) {
         Item item = Item.fromString(id);
+        item.setCount(count);
+        item.setDamage(meta);
         item.setCustomName(RESET + Format.format(name, player));
     
         if (lore != null) {
