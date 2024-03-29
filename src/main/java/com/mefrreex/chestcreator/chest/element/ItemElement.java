@@ -5,7 +5,6 @@ import cn.nukkit.item.Item;
 import cn.nukkit.utils.TextFormat;
 import com.mefrreex.chestcreator.chest.action.Action;
 import com.mefrreex.chestcreator.utils.Format;
-import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,25 +12,24 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
+@Getter 
+@Setter
 @ToString
 public class ItemElement {
     
-    @SerializedName("id") private String namespaceId;
-    @SerializedName("name") private String name;
-    @SerializedName("canTake") private boolean canTake;
-    @SerializedName("close") private boolean close;
+    private String id;
+    private String name;
+    private boolean canTake;
+    private boolean close;
 
-    @SerializedName("lore") 
     private List<String> lore = new ArrayList<>();
 
-    @SerializedName("actions") 
     private List<Action> actions = new ArrayList<>();
 
     private static final String RESET = TextFormat.RESET.toString() + TextFormat.WHITE.toString(); 
 
     public ItemElement(String namespaceId, String name) {
-        this.namespaceId = namespaceId;
+        this.id = namespaceId;
         this.name = name;
     }
 
@@ -57,7 +55,7 @@ public class ItemElement {
      * @return Item
      */
     public Item getItem(Player player) {
-        Item item = Item.fromString(namespaceId);
+        Item item = Item.fromString(id);
         item.setCustomName(RESET + Format.format(name, player));
     
         if (lore != null) {

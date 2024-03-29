@@ -2,7 +2,6 @@ package com.mefrreex.chestcreator.chest;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.command.CommandMap;
 import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
 import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
@@ -14,7 +13,6 @@ import com.mefrreex.chestcreator.event.ChestSendEvent;
 import com.mefrreex.chestcreator.utils.Format;
 import me.iwareq.fakeinventories.FakeInventory;
 import me.iwareq.fakeinventories.util.ItemHandler;
-import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,20 +22,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Getter @Setter
+@Getter 
+@Setter
 @ToString
 public class Chest {
     
-    @SerializedName("command") private ChestCommand command;
+    private ChestCommand command;
     private transient ChestCommandExecutor executableCommand;
 
-    @SerializedName("type") private InventoryType type;
-    @SerializedName("switchMode") private ChestSwitchMode switchMode;
-    @SerializedName("title") private String title;
-    @SerializedName("items") private Map<Integer, ItemElement> items = new HashMap<>();
+    private InventoryType type;
+    private ChestSwitchMode switchMode;
+    private String title;
+    private Map<Integer, ItemElement> items = new HashMap<>();
 
-    @SerializedName("openActions") private List<Action> openActions = new ArrayList<>();
-    @SerializedName("closeActions") private List<Action> closeActions = new ArrayList<>();
+    private List<Action> openActions = new ArrayList<>();
+    private List<Action> closeActions = new ArrayList<>();
 
     public Chest() {
         this(InventoryType.CHEST);
@@ -55,15 +54,10 @@ public class Chest {
      * Initialize the chest
      */
     public void init() {
-        if (command != null && command.isEnable()) {
-            this.registerCommand();
+        if (this.command != null && command.isEnable()) {
+            this.executableCommand = new ChestCommandExecutor(command, this);
+            Server.getInstance().getCommandMap().register("ChestCreator", executableCommand);
         }
-    }
-
-    private void registerCommand() {
-        CommandMap map = Server.getInstance().getCommandMap();
-        this.executableCommand = new ChestCommandExecutor(command, this);
-        map.register("ChestCreator", executableCommand);
     }
 
     /**

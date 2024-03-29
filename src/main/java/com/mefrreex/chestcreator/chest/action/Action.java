@@ -1,7 +1,6 @@
 package com.mefrreex.chestcreator.chest.action;
 
 import cn.nukkit.Player;
-import com.google.gson.annotations.SerializedName;
 import com.mefrreex.chestcreator.chest.action.executor.Executor;
 import com.mefrreex.chestcreator.chest.action.executor.ExecutorManager;
 import com.mefrreex.chestcreator.utils.Format;
@@ -9,11 +8,12 @@ import com.mefrreex.chestcreator.utils.Format;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter @ToString
+@Getter 
+@ToString
 public class Action {
     
-    @SerializedName("type") private String type;
-    @SerializedName("value") private String value;
+    private String type;
+    private String value;
 
     public Action(String type, String data) {
         this.type = type;
