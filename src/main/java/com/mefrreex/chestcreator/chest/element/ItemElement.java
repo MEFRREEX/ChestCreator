@@ -31,8 +31,8 @@ public class ItemElement {
 
     private static final String RESET = TextFormat.RESET.toString() + TextFormat.WHITE.toString(); 
 
-    public ItemElement(String namespaceId, String name) {
-        this.id = namespaceId;
+    public ItemElement(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 
