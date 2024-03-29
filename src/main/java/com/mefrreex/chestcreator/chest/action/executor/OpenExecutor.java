@@ -17,8 +17,7 @@ public class OpenExecutor implements Executor {
 
         PlayerChest playerChest = ChestManager.getPlayerChest().get(player);
         if (playerChest != null) {
-            Chest currentChest = playerChest.chest();
-            currentChest.getSwitchMode().process(player, playerChest, chest);
+            playerChest.chest().getSwitchMode().process(player, playerChest, chest);
         } else {
             chest.send(player);
         }

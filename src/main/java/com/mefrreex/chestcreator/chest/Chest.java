@@ -2,7 +2,6 @@ package com.mefrreex.chestcreator.chest;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.inventory.Inventory;
 import cn.nukkit.inventory.InventoryType;
 import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
 import com.mefrreex.chestcreator.chest.action.Action;
@@ -11,8 +10,6 @@ import com.mefrreex.chestcreator.chest.command.ChestCommandExecutor;
 import com.mefrreex.chestcreator.chest.element.ItemElement;
 import com.mefrreex.chestcreator.event.ChestSendEvent;
 import com.mefrreex.chestcreator.utils.Format;
-import me.iwareq.fakeinventories.FakeInventory;
-import me.iwareq.fakeinventories.util.ItemHandler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -85,6 +82,10 @@ public class Chest {
         return this;
     }
 
+    /**
+     * Get chest switch mode
+     * @return ChestSwitchMode
+     */
     public ChestSwitchMode getSwitchMode() {
         return switchMode != null ? switchMode : ChestSwitchMode.DEFAULT;
     }
@@ -94,20 +95,21 @@ public class Chest {
      * @param player Player
      * @return Inventory
      */
-    public Inventory build(Player player) {
-        FakeInventory inventory = new FakeInventory(type, Format.format(title, player));
+    public ChestInventory build(Player player) {
+        ChestInventory inventory = new ChestInventory(type, Format.format(title, player));
         inventory.setDefaultItemHandler((item, event) -> event.setCancelled());
+        inventory.setCloseHandler(pl -> {
+            closeActions.forEach(action -> action.execute(player));
+        });
 
         items.forEach((slot, item) -> {
-            ItemHandler handler  = (i, event) -> {
+            inventory.setItem(slot, item.getItem(player), (i, event) -> {
                 item.getActions().forEach(action -> {
                     if (!item.isCanTake()) event.setCancelled();
                     if (item.isClose()) inventory.close(player);
                     action.execute(player);
                 });
-            };
-    
-            inventory.setItem(slot, item.getItem(player), handler);
+            });
         });
 
         return inventory;
@@ -129,7 +131,7 @@ public class Chest {
             action.execute(player);
         });
 
-        Inventory inventory = this.build(player);
+        ChestInventory inventory = this.build(player);
         ChestManager.getPlayerChest().put(player, new PlayerChest(this, inventory));
         player.addWindow(inventory);
     }
