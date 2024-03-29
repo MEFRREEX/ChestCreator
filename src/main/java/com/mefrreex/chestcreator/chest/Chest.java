@@ -2,7 +2,7 @@ package com.mefrreex.chestcreator.chest;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.inventory.InventoryType;
+import cn.nukkit.inventory.fake.FakeInventoryType;
 import com.mefrreex.chestcreator.chest.ChestManager.PlayerChest;
 import com.mefrreex.chestcreator.chest.action.Action;
 import com.mefrreex.chestcreator.chest.command.ChestCommand;
@@ -27,7 +27,7 @@ public class Chest {
     private ChestCommand command;
     private transient ChestCommandExecutor executableCommand;
 
-    private InventoryType type;
+    private FakeInventoryType type;
     private ChestSwitchMode switchMode;
     private String title;
     private Map<Integer, ItemElement> items = new HashMap<>();
@@ -36,14 +36,14 @@ public class Chest {
     private List<Action> closeActions = new ArrayList<>();
 
     public Chest() {
-        this(InventoryType.CHEST);
+        this(FakeInventoryType.CHEST);
     }
 
-    public Chest(InventoryType type) {
+    public Chest(FakeInventoryType type) {
         this(type, "");
     }
 
-    public Chest(InventoryType type, String title) {
+    public Chest(FakeInventoryType type, String title) {
         this.title = title; 
     }
 
@@ -97,13 +97,14 @@ public class Chest {
      */
     public ChestInventory build(Player player) {
         ChestInventory inventory = new ChestInventory(type, Format.format(title, player));
-        inventory.setDefaultItemHandler((item, event) -> event.setCancelled());
+        inventory.setDefaultItemHandler((inv, slot, oldItem, newItem, event) -> event.setCancelled());
         inventory.setCloseHandler(pl -> {
             closeActions.forEach(action -> action.execute(player));
         });
 
         items.forEach((slot, item) -> {
-            inventory.setItem(slot, item.getItem(player), (i, event) -> {
+            inventory.setItem(slot, item.getItem(player));
+            inventory.setItemHandler(slot, (inv, s, oldItem, newItem, event) -> {
                 item.getActions().forEach(action -> {
                     if (!item.isCanTake()) event.setCancelled();
                     if (item.isClose()) inventory.close(player);

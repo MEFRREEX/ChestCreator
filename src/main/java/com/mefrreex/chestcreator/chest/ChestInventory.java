@@ -1,8 +1,8 @@
 package com.mefrreex.chestcreator.chest;
 
 import cn.nukkit.Player;
-import cn.nukkit.inventory.InventoryType;
-import me.iwareq.fakeinventories.FakeInventory;
+import cn.nukkit.inventory.fake.FakeInventory;
+import cn.nukkit.inventory.fake.FakeInventoryType;
 
 import java.util.function.Consumer;
 
@@ -10,7 +10,7 @@ public class ChestInventory extends FakeInventory {
 
     private Consumer<Player> closeHandler;
 
-    public ChestInventory(InventoryType type, String title) {
+    public ChestInventory(FakeInventoryType type, String title) {
         super(type, title);
     }
     

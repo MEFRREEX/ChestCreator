@@ -24,14 +24,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.powernukkitx</groupId>
-            <artifactId>powernukkitx</artifactId>
-            <version>1.20.40-r1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.IWareQ</groupId>
-            <artifactId>FakeInventories</artifactId>
-            <version>1.1.5</version>
+            <groupId>com.github.PowerNukkitX</groupId>
+            <artifactId>PowerNukkitX</artifactId>
+            <version>master-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.creeperface.nukkit.placeholderapi</groupId>
