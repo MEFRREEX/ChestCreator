@@ -1,6 +1,7 @@
-package com.mefrreex.chestcreator.chest.action.executor;
+package com.mefrreex.chestcreator.chest.action.executor.impl;
 
 import cn.nukkit.Player;
+import com.mefrreex.chestcreator.chest.action.executor.Executor;
 import com.mefrreex.formcreator.form.FormManager;
 
 public class OpenFormExecutor implements Executor {
@@ -16,5 +17,4 @@ public class OpenFormExecutor implements Executor {
             throw new RuntimeException("FormCreator plugin not found", e);
         }
     }
-
 }

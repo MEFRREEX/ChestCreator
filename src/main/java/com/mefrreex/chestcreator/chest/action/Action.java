@@ -26,10 +26,11 @@ public class Action {
 
     public void execute(Player player) {
         Executor executor = ExecutorManager.getExecutor(this.getType());
+        
         if (executor == null) {
             throw new RuntimeException("No registered Executor found for type " + this.getType());
         }
-        String data = Format.format(value, player);
-        executor.execute(player, data);
+        
+        executor.execute(player, Format.format(value, player));
     }
 }

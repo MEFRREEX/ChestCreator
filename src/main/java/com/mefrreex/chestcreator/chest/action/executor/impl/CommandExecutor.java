@@ -1,8 +1,9 @@
-package com.mefrreex.chestcreator.chest.action.executor;
+package com.mefrreex.chestcreator.chest.action.executor.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandMap;
+import com.mefrreex.chestcreator.chest.action.executor.Executor;
 
 public class CommandExecutor implements Executor {
 
@@ -17,7 +18,7 @@ public class CommandExecutor implements Executor {
     @Override
     public void execute(Player player, String command) {
         if (server.isPrimaryThread()) {
-            executeCommand(player, command);
+            this.executeCommand(player, command);
         } else {
             server.getScheduler().scheduleTask(null, () -> executeCommand(player, command));
         }

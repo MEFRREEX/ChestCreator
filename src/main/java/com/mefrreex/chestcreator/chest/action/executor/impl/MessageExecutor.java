@@ -1,6 +1,7 @@
-package com.mefrreex.chestcreator.chest.action.executor;
+package com.mefrreex.chestcreator.chest.action.executor.impl;
 
 import cn.nukkit.Player;
+import com.mefrreex.chestcreator.chest.action.executor.Executor;
 
 public class MessageExecutor implements Executor {
 
@@ -18,5 +19,4 @@ public class MessageExecutor implements Executor {
             player.chat(message);
         }
     }
-
 }
