@@ -53,7 +53,7 @@ Example chest:
                     // CONSOLE_COMMAND  - Execute command from server
                     // MESSAGE - Send message to player
                     // PLAYER_MESSAGE - Send message from player
-                    // OPEN - Open other chest
+                    // OPEN_CHEST - Open other chest
                     // OPEN_FORM - Open form from FormCreator
                     "type": "OPEN",    // Type
                     "value": "example" // Action value
