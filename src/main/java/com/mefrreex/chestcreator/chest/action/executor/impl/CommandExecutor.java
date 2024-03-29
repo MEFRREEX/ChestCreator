@@ -24,12 +24,13 @@ public class CommandExecutor implements Executor {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private void executeCommand(Player player, String command) {
         CommandMap commandMap = server.getCommandMap();
         if (isPlayer) {
-            commandMap.executeCommand(player, command);
+            commandMap.dispatch(player, command);
         } else {
-            commandMap.executeCommand(server.getConsoleSender(), command);
+            commandMap.dispatch(server.getConsoleSender(), command);
         }
     }
 }
