@@ -1,9 +1,6 @@
 # ChestCreator
 Tool for easy creation of chests in Json file for Nukkit
 
-> [!IMPORTANT]
-> This plugin is dependent on the [FakeInventories](https://github.com/IWareQ/FakeInventories) library
-
 ## How to use
 
 > All chests are stored in the plugins/ChestCreator/chests folder
