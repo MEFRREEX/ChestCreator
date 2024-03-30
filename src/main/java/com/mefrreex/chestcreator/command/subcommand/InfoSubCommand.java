@@ -1,11 +1,10 @@
 package com.mefrreex.chestcreator.command.subcommand;
 
+import cn.nukkit.command.CommandSender;
+import cn.nukkit.plugin.PluginDescription;
 import com.mefrreex.chestcreator.ChestCreator;
 import com.mefrreex.chestcreator.command.BaseCommand;
 import com.mefrreex.chestcreator.command.BaseSubCommand;
-
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.plugin.PluginDescription;
 
 public class InfoSubCommand extends BaseSubCommand {
 

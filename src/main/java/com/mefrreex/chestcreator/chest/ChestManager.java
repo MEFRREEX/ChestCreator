@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class ChestManager {
     
+    @Getter
     private static final Map<String, Chest> chests = new HashMap<>();
 
     @Getter

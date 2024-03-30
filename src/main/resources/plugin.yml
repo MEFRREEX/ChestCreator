@@ -10,7 +10,9 @@ softdepend:
 permissions:
   chestcreator:
     default: true
+  chestcreator.help:
+    default: true
   chestcreator.open:
     default: op
-  chestcreator.info:
-    default: true
+  chestcreator.reload:
+    default: op

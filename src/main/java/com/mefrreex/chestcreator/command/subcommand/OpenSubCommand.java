@@ -1,14 +1,13 @@
 package com.mefrreex.chestcreator.command.subcommand;
 
+import cn.nukkit.Player;
+import cn.nukkit.Server;
+import cn.nukkit.command.CommandSender;
 import com.mefrreex.chestcreator.chest.Chest;
 import com.mefrreex.chestcreator.chest.ChestManager;
 import com.mefrreex.chestcreator.command.BaseCommand;
 import com.mefrreex.chestcreator.command.BaseSubCommand;
 import com.mefrreex.chestcreator.utils.Language;
-
-import cn.nukkit.Player;
-import cn.nukkit.Server;
-import cn.nukkit.command.CommandSender;
 
 public class OpenSubCommand extends BaseSubCommand {
 

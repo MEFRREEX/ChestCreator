@@ -6,15 +6,17 @@ import cn.nukkit.command.CommandSender;
 import com.mefrreex.chestcreator.command.subcommand.HelpSubCommand;
 import com.mefrreex.chestcreator.command.subcommand.InfoSubCommand;
 import com.mefrreex.chestcreator.command.subcommand.OpenSubCommand;
+import com.mefrreex.chestcreator.command.subcommand.ReloadSubCommand;
 
 public class ChestCreatorCommand extends BaseCommand {
 
     public ChestCreatorCommand() {
         super("chestcreator", "ChestCreator");
         this.setPermission("chestcreator");
-        this.registerSubCommand(new OpenSubCommand(this));
-        this.registerSubCommand(new InfoSubCommand(this));
         this.registerSubCommand(new HelpSubCommand(this));
+        this.registerSubCommand(new InfoSubCommand(this));
+        this.registerSubCommand(new OpenSubCommand(this));
+        this.registerSubCommand(new ReloadSubCommand(this));
     }
 
     @Override
