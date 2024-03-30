@@ -2,34 +2,59 @@ package com.mefrreex.chestcreator.chest.action.executor.impl;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
-import cn.nukkit.command.CommandMap;
+import cn.nukkit.command.ConsoleCommandSender;
+import cn.nukkit.lang.CommandOutputContainer;
+import cn.nukkit.lang.TextContainer;
 import com.mefrreex.chestcreator.chest.action.executor.Executor;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandExecutor implements Executor {
 
-    private final boolean isPlayer;
-    private final Server server;
+    private final CommandExecuteType executeType;
 
-    public CommandExecutor(boolean isPlayer) {
-        this.isPlayer = isPlayer;
-        this.server = Server.getInstance();
+    private static final ConsoleCommandSender CONSOLE_SENDER = Server.getInstance().getConsoleSender();
+    private static final OperatorSender OPERATOR_SENDER = new OperatorSender();
+
+    public CommandExecutor(CommandExecuteType executeType) {
+        this.executeType = executeType;
     }
 
     @Override
+    @SuppressWarnings("all")
     public void execute(Player player, String command) {
-        if (server.isPrimaryThread()) {
-            this.executeCommand(player, command);
-        } else {
-            server.getScheduler().scheduleTask(null, () -> executeCommand(player, command));
+        Server.getInstance().executeCommand(switch(executeType) {
+            case PLAYER -> player;
+            case CONSOLE -> CONSOLE_SENDER;
+            case OPERATOR -> OPERATOR_SENDER;
+        }, command);
+    }
+
+    public static class OperatorSender extends ConsoleCommandSender {
+
+        @Override
+        public void sendMessage(String message) {
+            
+        }
+
+        @Override
+        public void sendMessage(TextContainer message) {
+            
+        }
+
+        @Override
+        public void sendCommandOutput(CommandOutputContainer arg0) {
+            
+        }
+
+        @Override
+        public @NotNull String getName() {
+            return "Operator";
         }
     }
 
-    private void executeCommand(Player player, String command) {
-        CommandMap commandMap = server.getCommandMap();
-        if (isPlayer) {
-            commandMap.executeCommand(player, command);
-        } else {
-            commandMap.executeCommand(server.getConsoleSender(), command);
-        }
+    public static enum CommandExecuteType {
+        PLAYER,
+        CONSOLE,
+        OPERATOR
     }
 }
