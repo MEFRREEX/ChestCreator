@@ -44,6 +44,7 @@ public class Chest {
     }
 
     public Chest(InventoryType type, String title) {
+        this.type = type;
         this.title = title; 
     }
 
