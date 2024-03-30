@@ -6,6 +6,8 @@ public interface ActionType {
 
     String CONSOLE_COMMAND = "CONSOLE_COMMAND";
 
+    String OPERATOR_COMMAND = "OPERATOR_COMMAND";
+
     String MESSAGE = "MESSAGE";
 
     String PLAYER_MESSAGE = "PLAYER_MESSAGE";
@@ -13,7 +15,8 @@ public interface ActionType {
     @Deprecated
     String OPEN = "OPEN";
 
-    String OPEN_CHEST = "OPEN_CHEST";
-
     String OPEN_FORM = "OPEN_FORM";
+
+    String OPEN_CHEST = "OPEN_CHEST";
 }
+
