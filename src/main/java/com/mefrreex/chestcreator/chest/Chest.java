@@ -107,7 +107,10 @@ public class Chest {
             inventory.setItemHandler(slot, (inv, s, oldItem, newItem, event) -> {
                 item.getActions().forEach(action -> {
                     if (!item.isCanTake()) event.setCancelled();
-                    if (item.isClose()) inventory.close(player);
+                    if (item.isClose()) {
+                        inventory.setCloseHandler(null);
+                        inventory.close(player);
+                    }
                     action.execute(player);
                 });
             });

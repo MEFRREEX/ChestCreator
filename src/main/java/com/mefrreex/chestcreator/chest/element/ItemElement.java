@@ -37,6 +37,13 @@ public class ItemElement {
     }
 
     /**
+     * Get item count
+     */
+    private int getCount() {
+        return count < 1 ? 1 : count;
+    }
+
+    /**
      * Add lore line
      */
     public ItemElement addLore(String line) {
@@ -58,7 +65,7 @@ public class ItemElement {
      * @return Item
      */
     public Item getItem(Player player) {
-        Item item = Item.get(id, meta, count);
+        Item item = Item.get(id, meta, this.getCount());
         item.setCustomName(RESET + Format.format(name, player));
     
         if (lore != null) {
