@@ -1,5 +1,8 @@
 package com.mefrreex.chestcreator;
 
+import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.Listener;
+import cn.nukkit.event.player.PlayerDropItemEvent;
 import cn.nukkit.plugin.PluginBase;
 import com.mefrreex.chestcreator.chest.ChestManager;
 import com.mefrreex.chestcreator.chest.action.executor.ExecutorManager;
@@ -11,7 +14,7 @@ import com.creeperface.nukkit.placeholderapi.api.PlaceholderAPI;
 import java.io.File;
 import java.io.IOException;
 
-public class ChestCreator extends PluginBase {
+public class ChestCreator extends PluginBase implements Listener {
     
     private static ChestCreator instance;
 
@@ -33,6 +36,14 @@ public class ChestCreator extends PluginBase {
         ChestManager.loadAll();
         ChestCreatorCommand.register();
         this.loadPlaceholders();
+        this.getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @EventHandler
+    public void onDrop(PlayerDropItemEvent event) {
+        if (event.getPlayer().getFakeInventoryOpen()){
+            event.setCancelled();
+        }
     }
 
     private void setup() {
@@ -60,7 +71,6 @@ public class ChestCreator extends PluginBase {
         metrics.addCustomChart(new Metrics.SimplePie("nukkit_version", () -> this.getServer().getNukkitVersion()));
     }
 
-    /** Instance */
     public static ChestCreator get() {
         return instance;
     }
